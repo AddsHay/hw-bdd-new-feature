@@ -32,3 +32,17 @@ Scenario: can't find similar movies if we don't know director (sad path)
   When  I follow "Find Movies With Same Director"
   Then  I should be on the home page
   And   I should see "'Alien' has no director info"
+
+Scenario: create a new movie
+  Given I am on the create new movie page
+  Then I fill in "Title" with "woo"
+  And I fill in "Director" with "Adrian Haynes"
+  And I press "Save Changes"
+  Then I should be on the home page
+  And I should see "woo"
+  And I should see "woo was successfully created."
+
+Scenario: delete a movie
+  Given I am on the details page for "Blade Runner"
+  When  I follow "Delete"
+  Then I should not see "Blade Runners"
